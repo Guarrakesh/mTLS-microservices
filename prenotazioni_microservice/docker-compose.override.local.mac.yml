@@ -1,0 +1,19 @@
+version: "3"
+services:
+  spring:
+    volumes:
+      - "data:${CONTAINER_DIR}"
+  db:
+    ports:
+      - "${DB_PORT}:3306"
+
+
+
+
+volumes:
+  data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
+      device: ":${SOURCE_DIR}"

@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+    spring:
+    volumes:
+      - "${SOURCE_DIR}:${CONTAINER_DIR}"
+
+  
+  db:
+    ports:
+      - "${DB_PORT}:3306"
