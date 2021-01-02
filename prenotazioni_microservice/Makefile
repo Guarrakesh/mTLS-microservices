@@ -8,11 +8,12 @@ dir=$(shell pwd)
 ecr-login=$(shell aws ecr get-login --no-include-email)
 
 refresh: down spring-build up-build
+
 spring-build:
 	@echo "Building application for $(PROJECT_NAME)"
-	cd spring && ./gradlew clean
-	cd spring && ./gradlew build
-	cd spring && mkdir -p build/dependency && (cd build/dependency; jar -xf ../libs/*.jar)
+	cd spring && ./mvnw clean
+	cd spring && ./mvnw package
+	cd spring && mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 start-pds:
 	@echo 
 
