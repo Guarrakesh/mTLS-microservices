@@ -7,6 +7,10 @@ services:
         DEPENDENCY: build/dependency
       context: spring
     container_name: "${PROJECT_NAME}_springboot"
+    environment:
+      SSL_KEYSTORE_DIR: $SSL_KEYSTORE_DIR
+      SSL_KEYSTORE_PASSWORD: $SSL_KEYSTORE_PASSWORD
+      SSL_CLIENT_AUTH: $SSL_CLIENT_AUTH
     ports:
       - $SPRING_PORT:8080
 

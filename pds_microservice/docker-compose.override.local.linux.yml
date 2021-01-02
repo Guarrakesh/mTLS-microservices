@@ -3,7 +3,7 @@ version: "3"
 services:
     spring:
     volumes:
-      - "${SOURCE_DIR}:${CONTAINER_DIR}"
+      - "${DATA_DIR}:${CONTAINER_DIR}/data"
 
   
   db:

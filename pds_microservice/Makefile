@@ -8,6 +8,7 @@ dir=$(shell pwd)
 ecr-login=$(shell aws ecr get-login --no-include-email)
 
 refresh: down spring-build up-build
+
 spring-build:
 	@echo "Building application for $(PROJECT_NAME)"
 	cd spring && ./gradlew clean
