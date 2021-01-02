@@ -23,3 +23,6 @@ endpoints:
     enabled: true
 
 
+network:
+  pds:
+    host: pds_spring

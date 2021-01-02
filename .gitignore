@@ -17,4 +17,4 @@ README.html
 *.iml
 .idea
 
-*/.env
+*/*.env
