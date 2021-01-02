@@ -17,8 +17,7 @@ spring-build:
 	cd spring && ./mvnw package
 	cd spring && mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
-
-
 run:
 	@echo "Running application in $(DEPENDENCY)..."
+
 	export $(cat db.env | xargs) && export $(cat spring.env | xargs) && cd spring && ./mvnw spring-boot:run

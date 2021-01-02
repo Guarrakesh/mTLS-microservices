@@ -1,11 +1,13 @@
 server:
-  port: 8081
+  port: 8080
   ssl:
     key-store: ${SSL_KEYSTORE_DIR}
     key-store-password: ${SSL_KEYSTORE_PASSWORD}
     client-auth: NONE
     enabled: false
-
+  error:
+    whitelabel:
+      enabled: false
 #TODO: figure out why I need this here and in bootstrap.yml
 spring:
   application:

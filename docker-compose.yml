@@ -4,14 +4,16 @@ services:
 
   # PDS Microservice
   pds_spring:
-    build: 
-      args:
-        DEPENDENCY: target/dependency
-      context: pds_microservice/spring
+    image: maven:3.6.3-jdk-8
     container_name: "${PROJECT_NAME}_pds_spring"
+    command: mvn spring-boot:run
     env_file:
       - pds_microservice/spring.env
+    working_dir: /usr/src/mymaven
+    ports:
+      - 8080:8080
     volumes:
+      - "./pds_microservice/spring:/usr/src/mymaven"
       - "./pds_microservice/spring/${DATA_DIR}:${CONTAINER_DIR}/${DATA_DIR}"
 
 
@@ -30,14 +32,16 @@ services:
 
   # Prenotazioni Microservice
   prenotazioni_spring:
-    build:
-      args:
-        DEPENDENCY: target/dependency
-      context: prenotazioni_microservice/spring
+    image: maven:3.6.3-jdk-8
     container_name: "${PROJECT_NAME}_prenotazioni_spring"
+    command: mvn spring-boot:run
+    working_dir: /usr/src/mymaven
+    ports:
+      - 8081:8080
     env_file:
       - prenotazioni_microservice/spring.env
     volumes:
+      - "./prenotazioni_microservice/spring:/usr/src/mymaven"
       - "./prenotazioni_microservice/spring/${DATA_DIR}:${CONTAINER_DIR}/${DATA_DIR}"
 
 

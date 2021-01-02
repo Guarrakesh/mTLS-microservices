@@ -7,7 +7,7 @@ default: up
 dir=$(shell pwd)
 ecr-login=$(shell aws ecr get-login --no-include-email)
 
-refresh: down spring-build up-build
+refresh: down up
 
 
 run_pds:
@@ -22,7 +22,7 @@ up-build:
 
 up:
 	@echo "Starting up containers for $(PROJECT_NAME)..."
-	docker-compose -f docker-compose.yml -f docker-compose.override.$(COMPOSE_OVERRIDE).yml up -d --remove-orphans
+	docker-compose -f docker-compose.yml up
 
 down: stop
 
