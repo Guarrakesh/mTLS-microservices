@@ -6,11 +6,11 @@ RUN apk update && apk add bash
 USER spring:spring
 
 
-ARG DEPENDENCY=build/dependency
+ARG DEPENDENCY=target/dependency
 COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY ${DEPENDENCY}/META-INF /app/META-INF
 COPY ${DEPENDENCY}/BOOT-INF/classes /app
 
 # ENTRYPOINT ["tail", "-f", "/dev/null"]
 
-ENTRYPOINT ["java","-cp","app:app/lib/*","hello.Application"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","pds.Application"]

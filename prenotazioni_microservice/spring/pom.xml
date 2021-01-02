@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
-    <artifactId>pds-microservice</artifactId>
+    <artifactId>prenotazioni-microservice</artifactId>
     <version>0.1.0</version>
     <packaging>jar</packaging>
-    <name>Percorso di Studi Microservice</name>
+    <name>Prenotazioni Microservice</name>
     <description>Getting started with Spring Boot and Docker</description>
 
     <parent>
@@ -18,7 +18,7 @@
     </parent>
 
     <properties>
-        <docker.image.prefix>springio</docker.image.prefix>
+        <docker.image.prefix>mtls_pds</docker.image.prefix>
         <java.version>1.8</java.version>
     </properties>
 
@@ -32,6 +32,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

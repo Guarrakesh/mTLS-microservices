@@ -6,15 +6,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/pds")
 public class PdsService {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> index() {
 
-        return ResponseEntity.noContent().build();
+    private final PdsRepository repository;
+
+    PdsService(PdsRepository repo) {
+        this.repository = repo;
+    }
+    @RequestMapping(method = RequestMethod.GET)
+    public List<PercorsoDiStudi> index() {
+
+        return repository.findAll();
     }
 }
 

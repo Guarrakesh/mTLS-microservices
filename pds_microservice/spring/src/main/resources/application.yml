@@ -4,6 +4,7 @@ server:
     key-store: ${SSL_KEYSTORE_DIR}
     key-store-password: ${SSL_KEYSTORE_PASSWORD}
     client-auth: ${SSL_CLIENT_AUTH}
+    enabled: ${SSL_ENABLED}
 
 #TODO: figure out why I need this here and in bootstrap.yml
 spring:
@@ -20,3 +21,5 @@ endpoints:
     enabled: true
   shutdown:
     enabled: true
+
+
