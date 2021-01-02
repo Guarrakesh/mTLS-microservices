@@ -7,4 +7,4 @@ COPY ${DEPENDENCY}/META-INF /app/META-INF
 COPY ${DEPENDENCY}/BOOT-INF/classes /app
 
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
- ENTRYPOINT ["java","-cp","app:app/lib/*","hello.Application"]
+ ENTRYPOINT ["java","-cp","app:app/lib/*","prenotazioni.Application"]
