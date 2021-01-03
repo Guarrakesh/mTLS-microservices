@@ -1,11 +1,13 @@
 # Step : Test and package
 FROM maven:3.6.3-jdk-8 as target
 
+WORKDIR /tmp/
 COPY pom.xml /tmp/
 COPY src /tmp/src/
-WORKDIR /tmp/
+
 RUN mvn dependency:go-offline
 
+COPY src /build/src
 RUN mvn package
 
 # Step : Package image

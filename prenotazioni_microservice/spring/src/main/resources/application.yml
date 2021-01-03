@@ -30,3 +30,5 @@ endpoints:
 network:
   pds:
     host: https://pds:8080
+  registrazioni:
+    host: https://registrazioni:8080

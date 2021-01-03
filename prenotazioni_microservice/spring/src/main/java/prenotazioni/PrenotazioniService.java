@@ -2,6 +2,7 @@ package prenotazioni;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +12,6 @@ import java.net.URI;
 import java.util.Map;
 
 
-@Configurable
 @RestController
 @RequestMapping(value = "/prenotazioni")
 public class PrenotazioniService {
@@ -23,17 +23,20 @@ public class PrenotazioniService {
     @RequestMapping(method = RequestMethod.GET)
     public Object index() {
         try {
-            Map<String, String> pdsHost = (Map<String, String>) configuration.getNetwork().get("pds");
-            URI uri = URI.create(pdsHost.get("host"));
-            RestTemplate restTemplate = new RestTemplate();
-            Object pds = restTemplate.getForEntity(uri + "/pds", Object.class);
 
-            return pds;
+            Map<String, String> pds = (Map<String, String>) configuration.getNetwork().get("pds");
+            URI uri = URI.create(pds.get("host"));
+            RestTemplate restTemplate = new RestTemplate();
+
+            Object pdss = restTemplate.getForEntity(uri + "/pds", Object.class);
+
+            return pdss;
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "started";
+
+        return ResponseEntity.noContent().build();
     }
 }
 
