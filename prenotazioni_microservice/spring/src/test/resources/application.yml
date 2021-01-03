@@ -1,12 +1,6 @@
 server:
   port: 8080
-  ssl:
-    key-store: ${SSL_KEYSTORE_DIR}
-    key-store-password: ${SSL_KEYSTORE_PASSWORD}
-    client-auth: ${SSL_CLIENT_AUTH}
-    enabled: ${SSL_ENABLED}
-    trust-store: ${SSL_TRUSTSTORE_DIR}
-    trust-store-password: ${SSL_TRUSTSTORE_PASSWORD}
+
   error:
     whitelabel:
       enabled: false

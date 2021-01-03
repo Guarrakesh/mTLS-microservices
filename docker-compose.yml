@@ -19,7 +19,6 @@ services:
     image: wodby/mariadb:$MARIADB_TAG
     container_name: "${PROJECT_NAME}_pds_db"
     env_file:
-
       - pds_microservice/db.env
     environment:
       MYSQL_TMP_TABLE_SIZE: 16M
