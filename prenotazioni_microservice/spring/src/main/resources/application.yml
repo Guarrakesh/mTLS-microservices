@@ -27,4 +27,4 @@ endpoints:
 
 network:
   pds:
-    host: pds_spring
+    host: https://pds:8080

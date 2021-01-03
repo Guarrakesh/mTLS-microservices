@@ -22,7 +22,7 @@ up-build:
 
 up:
 	@echo "Starting up containers for $(PROJECT_NAME)..."
-	docker-compose -f docker-compose.yml up
+	docker-compose -f docker-compose.yml up -d --remove-orphans
 
 down: stop
 

@@ -1,10 +1,17 @@
-FROM openjdk:8-jdk-alpine
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
-ARG DEPENDENCY=target/dependency
-COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
-COPY ${DEPENDENCY}/META-INF /app/META-INF
-COPY ${DEPENDENCY}/BOOT-INF/classes /app
+# Step : Test and package
+FROM maven:3.6.3-jdk-8 as target
 
-#ENTRYPOINT ["tail", "-f", "/dev/null"]
- ENTRYPOINT ["java","-cp","app:app/lib/*","prenotazioni.Application"]
+COPY pom.xml /tmp/
+COPY src /tmp/src/
+WORKDIR /tmp/
+RUN mvn dependency:go-offline
+
+RUN mvn package
+
+# Step : Package image
+FROM openjdk:8-jre-alpine
+RUN apk update && apk add bash
+
+
+CMD exec java $JAVA_OPTS -jar /app/my-app.jar
+COPY --from=target /tmp/target/*.jar /app/my-app.jar
