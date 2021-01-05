@@ -15,17 +15,17 @@ services:
       - "./pds_microservice/spring/${DATA_DIR}:${CONTAINER_DIR}/${DATA_DIR}"
 
 
-  pds_db:
-    image: wodby/mariadb:$MARIADB_TAG
-    container_name: "${PROJECT_NAME}_pds_db"
-    env_file:
-      - pds_microservice/db.env
-    environment:
-      MYSQL_TMP_TABLE_SIZE: 16M
-      MYSQL_MAX_ALLOWED_PACKET: 256M
-      MYSQL_WAIT_TIMEOUT: 1200
-      MYSQL_INNODB_LOCK_WAIT_TIMEOUT: 600
-      MYSQL_INNODB_BUFFER_POOL_SIZE: 256M
+#  pds_db:
+#    image: wodby/mariadb:$MARIADB_TAG
+#    container_name: "${PROJECT_NAME}_pds_db"
+#    env_file:
+#      - pds_microservice/db.env
+#    environment:
+#      MYSQL_TMP_TABLE_SIZE: 16M
+#      MYSQL_MAX_ALLOWED_PACKET: 256M
+#      MYSQL_WAIT_TIMEOUT: 1200
+#      MYSQL_INNODB_LOCK_WAIT_TIMEOUT: 600
+#      MYSQL_INNODB_BUFFER_POOL_SIZE: 256M
 
 
   # Prenotazioni Microservice
@@ -42,15 +42,15 @@ services:
     links:
       - "pds_spring:pds"
 
-  prenotazioni_db:
-    image: wodby/mariadb:$MARIADB_TAG
-    container_name: "${PROJECT_NAME}_prenotazioni_db"
-    env_file:
-      - prenotazioni_microservice/db.env
-
-    environment:
-      MYSQL_TMP_TABLE_SIZE: 16M
-      MYSQL_MAX_ALLOWED_PACKET: 256M
-      MYSQL_WAIT_TIMEOUT: 1200
-      MYSQL_INNODB_LOCK_WAIT_TIMEOUT: 600
-      MYSQL_INNODB_BUFFER_POOL_SIZE: 256M
+#  prenotazioni_db:
+#    image: wodby/mariadb:$MARIADB_TAG
+#    container_name: "${PROJECT_NAME}_prenotazioni_db"
+#    env_file:
+#      - prenotazioni_microservice/db.env
+#
+#    environment:
+#      MYSQL_TMP_TABLE_SIZE: 16M
+#      MYSQL_MAX_ALLOWED_PACKET: 256M
+#      MYSQL_WAIT_TIMEOUT: 1200
+#      MYSQL_INNODB_LOCK_WAIT_TIMEOUT: 600
+#      MYSQL_INNODB_BUFFER_POOL_SIZE: 256M

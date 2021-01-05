@@ -10,19 +10,13 @@ ecr-login=$(shell aws ecr get-login --no-include-email)
 refresh: down up
 
 
-run_pds:
-	cd pds_microservice && make run
-run_prenotazioni:
-	cd prenotazioni_microservice && make run
-
-
-up-build:
+x\up-build:
 	@echo "Building containers for $(PROJECT_NAME)..."
 	docker-compose -f docker-compose.yml -f docker-compose.override.$(COMPOSE_OVERRIDE).yml up -d --build --remove-orphans
 
 up:
 	@echo "Starting up containers for $(PROJECT_NAME)..."
-	docker-compose -f docker-compose.yml up -d --remove-orphans
+	docker-compose -f docker-compose.yml -f docker-compose.override.$(COMPOSE_OVERRIDE).yml up -d --remove-orphans
 
 down: stop
 
