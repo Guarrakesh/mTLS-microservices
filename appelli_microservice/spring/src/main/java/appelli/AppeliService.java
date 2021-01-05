@@ -1,26 +1,50 @@
 package appelli;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import appelli.entity.Appello;
+import appelli.repository.AppelliRepository;
 import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/pds")
+@RequestMapping(value = "/appelli")
 public class AppeliService {
 
+    @Autowired
+    Config configuration;
 
-    private final AppelliRepository repository;
+    @Autowired
+    AppelliRepository repository;
 
-    AppeliService(AppelliRepository repo) {
-        this.repository = repo;
-    }
     @RequestMapping(method = RequestMethod.GET)
-    public List<Appello> index() {
+    public ResponseEntity<List<Appello>> index() {
+        try {
 
-        return repository.findAll();
+            List<Appello> appelli = repository.findAll();
+
+            return ResponseEntity.ok(appelli);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return  ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Object> create(@RequestBody Appello body) {
+        try {
+            return ResponseEntity.ok(repository.save(new Appello(body)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.noContent().build();
     }
 }
 

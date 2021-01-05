@@ -5,7 +5,16 @@
   cdsId: 1 # Id corso di studi
   cdsName: "Ingegneria Informatica LM"
 
-- id: 8911
-  attDidId: 1
-  cdsId: 1
+- id: 11
+  attDidId: 2 # Id attività didattica
+  attDidName: "Network Security"
+  cdsId: 1 # Id corso di studi
+  cdsName: "Ingegneria Informatica LM"
+
+- id: 12
+  attDidId: 3 # Id attività didattica
+  attDidName: "Calcolatori Elettronici 2"
+  cdsId: 1 # Id corso di studi
+  cdsName: "Ingegneria Informatica LM"
+
 

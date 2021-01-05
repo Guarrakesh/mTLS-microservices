@@ -11,12 +11,11 @@ public class Application {
 
 	@RequestMapping("/")
 	public String home() {
-		return "Hello PDSx ";
+		return "Hello Appelli ";
 	}
 
 	public static void main(String[] args) {
 
-		System.getenv("SSL_KEYSTORE_DIR");
 		SpringApplication.run(Application.class, args);
 	}
 
