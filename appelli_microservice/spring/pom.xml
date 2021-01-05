@@ -7,8 +7,8 @@
     <artifactId>pds-microservice</artifactId>
     <version>0.1.0</version>
     <packaging>jar</packaging>
-    <name>Percorso di Studi Microservice</name>
-    <description>PDS Microservice</description>
+    <name>Appelli esame Microservice</name>
+    <description>Appelli Microservice</description>
 
     <repositories>
         <repository>

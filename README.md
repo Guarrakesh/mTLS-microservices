@@ -8,7 +8,8 @@ This is split in 2 branches:
 * **main-scenario-2**: is like the scenario-1 with the addition of the ***short-lived* certificates**. Certification management and privisioning is made with **Lemur**, that handles 
 the expirations of short-lived certificates and distributes the new certificate to the microservices.
   
-This project is a two-people university project, made for the ***Secure System Design*** course of *Valentina Casola, Università Federico II di Napoli.*
+This project is a two-people university project, made for the ***Secure System Design*** course of *Valentina Casola, Università Federico II di Napoli* and with the support of 
+*Ermanno Battista*, from Fervento.
 It strongly refers to the **Part 3: Service-to-Service Communication** of the *Microservice Security in Action, Prabath Siriwardena and Nuwan Dias - Manning 2020*
 
 The project is **Dockerized** and it is recommended to run it on Unix-like systems with Docker installed (Linux, MacOS) or in Windows with the WSL.

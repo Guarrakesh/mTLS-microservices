@@ -10,7 +10,7 @@ ecr-login=$(shell aws ecr get-login --no-include-email)
 refresh: down up
 
 
-x\up-build:
+up-build:
 	@echo "Building containers for $(PROJECT_NAME)..."
 	docker-compose -f docker-compose.yml -f docker-compose.override.$(COMPOSE_OVERRIDE).yml up -d --build --remove-orphans
 

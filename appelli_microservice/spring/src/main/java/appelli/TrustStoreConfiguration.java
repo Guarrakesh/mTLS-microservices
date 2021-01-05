@@ -1,5 +1,5 @@
 
-package pds;
+package appelli;
 
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;

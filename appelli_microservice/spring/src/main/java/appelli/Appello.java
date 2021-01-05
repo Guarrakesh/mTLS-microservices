@@ -1,4 +1,4 @@
-package pds;
+package appelli;
 
 import java.util.Objects;
 
@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class PercorsoDiStudi {
+public class Appello {
 
     private @Id @GeneratedValue Long id;
 
@@ -15,12 +15,12 @@ public class PercorsoDiStudi {
 
     private String code;
 
-    public PercorsoDiStudi(String name, String code) {
+    public Appello(String name, String code) {
         this.name = name;
         this.code = code;
     }
 
-    PercorsoDiStudi() {}
+    Appello() {}
 
     public Long getId() {
         return id;
@@ -54,6 +54,6 @@ public class PercorsoDiStudi {
 
     @Override
     public String toString() {
-        return "Pds{" + "id=" + this.id + ", name='" + this.name + '\'' + ", code='" + this.code + '\'' + '}';
+        return "Appello{" + "id=" + this.id + ", name='" + this.name + '\'' + ", code='" + this.code + '\'' + '}';
     }
 }
