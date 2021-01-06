@@ -7,7 +7,7 @@ default: up
 dir=$(shell pwd)
 ecr-login=$(shell aws ecr get-login --no-include-email)
 
-refresh: down up
+reload: down up-build
 
 
 up-build:

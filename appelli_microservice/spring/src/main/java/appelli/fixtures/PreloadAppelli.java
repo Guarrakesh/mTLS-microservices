@@ -29,7 +29,7 @@ public class PreloadAppelli {
 
             for (Appello appello: appelli) {
                 log.info(appello.getAttDidId() + " : " + appello.getAttDidName());
-                log.info("Preloading " + repo.save(new Appello(appello.getId(), appello.getAttDidId(), appello.getAttDidName(), appello.getCdsId(), appello.getCdsName())));
+                log.info("Preloading " + repo.save(new Appello(appello)));
             }
         };
     }

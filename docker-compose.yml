@@ -2,8 +2,8 @@ version: "3"
 
 services:
 
-  # PDS Microservice
-  pds_spring:
+  # Appelli Microservice
+  appelli_spring:
     build:
       args:
         DATA_DIR: ${DATA_DIR}
@@ -14,7 +14,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - "./pds_microservice/spring/${DATA_DIR}:${CONTAINER_DIR}/${DATA_DIR}"
+      - "./appelli_microservice/spring/${DATA_DIR}:${CONTAINER_DIR}/${DATA_DIR}"
 
 
 #  pds_db:
@@ -44,7 +44,7 @@ services:
     volumes:
       - "./prenotazioni_microservice/spring/${DATA_DIR}:${CONTAINER_DIR}/${DATA_DIR}"
     links:
-      - "pds_spring:pds"
+      - "appelli_spring:appelli"
 
 #  prenotazioni_db:
 #    image: wodby/mariadb:$MARIADB_TAG

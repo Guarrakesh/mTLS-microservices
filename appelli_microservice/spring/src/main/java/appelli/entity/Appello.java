@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Entity
 public class Appello {
     private @Id @GeneratedValue Long id;
 
@@ -17,6 +18,10 @@ public class Appello {
 
     private String cdsName;
 
+    private String dataAppello;
+
+    private String aula;
+
     public Appello(){
     }
 
@@ -25,13 +30,17 @@ public class Appello {
         this.attDidName = a.attDidName;
         this.cdsId = a.cdsId;
         this.cdsName = a.cdsName;
+        this.dataAppello = a.dataAppello;
+        this.aula = a.aula;
     }
 
-    public Appello(Long id, String attDidId, String attDidName, String cdsId, String cdsName){
+    public Appello(Long id, String attDidId, String attDidName, String cdsId, String cdsName, String dataAppello, String aula){
         this.attDidId = attDidId;
         this.attDidName = attDidName;
         this.cdsId = cdsId;
         this.cdsName = cdsName;
+        this.aula = aula;
+        this.dataAppello = dataAppello;
     }
 
     @Override
@@ -82,5 +91,21 @@ public class Appello {
 
     public void setCdsName(String cdsName) {
         this.cdsName = cdsName;
+    }
+
+    public String getDataAppello() {
+        return dataAppello;
+    }
+
+    public void setDataAppello(String dataAppello) {
+        this.dataAppello = dataAppello;
+    }
+
+    public String getAula() {
+        return aula;
+    }
+
+    public void setAula(String aula) {
+        this.aula = aula;
     }
 }

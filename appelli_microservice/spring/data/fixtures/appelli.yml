@@ -4,17 +4,23 @@
   attDidName: "Secure System Design"
   cdsId: 1 # Id corso di studi
   cdsName: "Ingegneria Informatica LM"
+  dataAppello: 2021-01-15T09:30:00
+  aula: "Microsoft Teams"
 
 - id: 11
   attDidId: 2 # Id attività didattica
   attDidName: "Network Security"
   cdsId: 1 # Id corso di studi
   cdsName: "Ingegneria Informatica LM"
+  dataAppello: 2021-01-22T10:30:00
+  aula: Via Claudio C3A
 
 - id: 12
   attDidId: 3 # Id attività didattica
   attDidName: "Calcolatori Elettronici 2"
   cdsId: 1 # Id corso di studi
   cdsName: "Ingegneria Informatica LM"
+  dataAppello: 2021-02-05T15:30
+  aula: Microsoft Teams
 
 
