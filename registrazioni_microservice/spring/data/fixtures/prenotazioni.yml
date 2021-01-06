@@ -1,0 +1,14 @@
+- id: 8910
+  attDidId: 1 # Id attività didattica
+  cdsId: 1 # Id corso di studi
+  appId: 10 # Id appello d'esame
+  studId: 883  # Id studente
+  studMatr: M63001042
+  dataCreazione: 2019-12-02T12:30:00
+- id: 8911
+  attDidId: 1
+  cdsId: 1
+  appId: 10
+  studId: 920
+  studMatr: M64001033
+  dataCreazione: 2019-12:05T23:32:00

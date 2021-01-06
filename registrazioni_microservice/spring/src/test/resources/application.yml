@@ -1,11 +1,11 @@
 server:
   port: 8080
 
+  error:
+    whitelabel:
+      enabled: false
 #TODO: figure out why I need this here and in bootstrap.yml
 spring:
-  devtools:
-    remote:
-      secret: thisismysecret
   application:
     name: testLatticeApp
 
@@ -20,3 +20,7 @@ endpoints:
   shutdown:
     enabled: true
 
+
+network:
+  pds:
+    host: https://pds:8080

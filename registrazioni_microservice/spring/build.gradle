@@ -19,7 +19,7 @@ apply plugin: 'io.spring.dependency-management'
 group = 'springio'
 
 bootJar {
-    baseName = 'gs-spring-boot-docker'
+    baseName = 'prenotazioni-docker'
     version =  '0.1.0'
 }
 

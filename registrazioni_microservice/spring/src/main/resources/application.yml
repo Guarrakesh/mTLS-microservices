@@ -30,5 +30,5 @@ endpoints:
 network:
   appelli:
     host: https://appelli:8080
-  registrazioni:
-    host: https://registrazioni:8080
+  prenotazioni:
+    host: https://prenotazioni:8080
