@@ -1,0 +1,46 @@
+
+services:
+
+  lemur-web:
+    restart: always
+    build: ./web
+    expose:
+      - "8000"
+    links:
+      - postgres:postgres
+    volumes:
+      - /usr/local/src/lemur/lemur/static/dist
+    environment:
+      DEBUG: 'False'
+      LEMUR_CONF: /usr/local/src/lemur/lemur.conf.py
+    networks:
+      - mtls-microservices_esami_network
+  lemur-nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes_from:
+      - lemur-web
+    links:
+      - lemur-web
+      - lemur-web:web
+    networks:
+      - mtls-microservices_esami_network
+
+  postgres:
+    restart: always
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: lemur
+      POSTGRES_PASSWORD: lemur
+      POSTGRES_DB: lemur
+    networks:
+      - mtls-microservices_esami_network
+
+networks:
+  mtls-microservices_esami_network:
+    external: true

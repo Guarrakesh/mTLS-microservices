@@ -8,14 +8,15 @@ services:
       args:
         DATA_DIR: ${DATA_DIR}
       context: appelli_microservice/spring
-    container_name: "${PROJECT_NAME}_pds_spring"
+    container_name: "${PROJECT_NAME}_appelli_spring"
     env_file:
       - appelli_microservice/spring.env
     ports:
       - 8080:8080
     volumes:
       - "./appelli_microservice/spring/${DATA_DIR}:${CONTAINER_DIR}/${DATA_DIR}"
-
+    networks:
+      - esami_network
 
 #  pds_db:
 #    image: wodby/mariadb:$MARIADB_TAG
@@ -45,6 +46,9 @@ services:
       - "./prenotazioni_microservice/spring/${DATA_DIR}:${CONTAINER_DIR}/${DATA_DIR}"
     links:
       - "appelli_spring:appelli"
+      - "lemur-web:lemur"
+    networks:
+      - esami_network
 
 #  prenotazioni_db:
 #    image: wodby/mariadb:$MARIADB_TAG
@@ -58,3 +62,8 @@ services:
 #      MYSQL_WAIT_TIMEOUT: 1200
 #      MYSQL_INNODB_LOCK_WAIT_TIMEOUT: 600
 #      MYSQL_INNODB_BUFFER_POOL_SIZE: 256M
+
+networks:
+  esami_network:
+    driver: bridge
+    external: false
