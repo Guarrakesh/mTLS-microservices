@@ -1,6 +1,5 @@
-
+version: "2"
 services:
-
   lemur-web:
     restart: always
     build: ./web
@@ -14,7 +13,7 @@ services:
       DEBUG: 'False'
       LEMUR_CONF: /usr/local/src/lemur/lemur.conf.py
     networks:
-      - mtls-microservices_esami_network
+      - microservices_esami_network
   lemur-nginx:
     restart: always
     build: ./nginx/
@@ -27,8 +26,7 @@ services:
       - lemur-web
       - lemur-web:web
     networks:
-      - mtls-microservices_esami_network
-
+      - microservices_esami_network
   postgres:
     restart: always
     image: postgres:latest
@@ -39,8 +37,8 @@ services:
       POSTGRES_PASSWORD: lemur
       POSTGRES_DB: lemur
     networks:
-      - mtls-microservices_esami_network
+      - microservices_esami_network
 
 networks:
-  mtls-microservices_esami_network:
+  microservices_esami_network:
     external: true
