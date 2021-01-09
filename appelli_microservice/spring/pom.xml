@@ -35,13 +35,13 @@
         <java.version>1.8</java.version>
     </properties>
 
-    <!--<build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <plugin>
+    <!--        <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.4.3</version>
@@ -57,9 +57,9 @@
                     <repository>docker.io/kkapelon/docker-maven-comparison</repository>
                     <tag>${project.version}</tag>
                 </configuration>
-            </plugin>
+            </plugin> -->
         </plugins>
-    </build>-->
+    </build>
 
     <dependencies>
         <dependency>
