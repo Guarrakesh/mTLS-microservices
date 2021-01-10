@@ -36,3 +36,12 @@ and edit the *spring.env* according to your preferences:
 ```console 
 make up
 ```
+
+
+
+## Utilities
+
+### Dump LEMUR Database
+* Install a PostegreSQL client to have pg_dump and psql binaries
+* ./pg_dump -h localhost -p 5432 -U lemur > {DUMP_FILE}
+* ./psql -h localhost -p 5432 -U lemur lemur < ${DUMP_FILE}
