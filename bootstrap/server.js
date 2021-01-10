@@ -4,6 +4,23 @@ const express = require('express');
 const yaml = require('js-yaml');
 const fs = require('fs');
 const axios = require('axios');
+const https = require('https');
+
+var options = {
+    key: fs.readFileSync(process.env.PRIVATE_KEY_PATH, "utf8"),
+    cert: fs.readFileSync(process.env.PUBLIC_CERT_PATH, "utf8"),
+    passphrase: process.env.PRIVATE_KEY_PASSWORD,
+    ca: fs.readFileSync(process.env.CA_CERT_PATH, "utf8"),
+};
+
+const httpsAgent = new https.Agent({
+    key: fs.readFileSync(process.env.PRIVATE_KEY_PATH, "utf8"),
+    cert: fs.readFileSync(process.env.PUBLIC_CERT_PATH, "utf8"),
+    ca: fs.readFileSync(process.env.CA_CERT_PATH, "utf8"),
+    passphrase: process.env.PRIVATE_KEY_PASSWORD,
+    rejectUnauthorized: false,
+    secureProtocol: 'TLSv1_2_method'
+});
 
 
 // Constants
@@ -17,13 +34,17 @@ const ENDPOINT_USER_KEYS = process.env.ENDPOINT_USER_KEYS;
 // App
 const app = express();
 
-function bootstrapHandler(req, res) {
+var server = https.createServer(options, app).listen(443, function(){
+  console.log("Express server listening on port " + 443);
+});
+async function bootstrapHandler(req, res) {
     try {
         let fileContents = fs.readFileSync('./microservices.yml', 'utf8');
         let data = yaml.load(fileContents);
 
         for (const microservice of data.microservices) {
-            getLongLivedForMicroservice(microservice);
+            const jwt = await getLongLivedForMicroservice(microservice);
+            deployJWT(jwt, microservice);
         }
 
         res.send('Successfully deployed!');
@@ -41,7 +62,7 @@ function bootstrapHandler(req, res) {
 async function getLongLivedForMicroservice(microservice)
 {
     const endpoint = ENDPOINT_USER_KEYS.replace(':userId', microservice.userId);
-    console.log(`Creating Token for ${microservice.name}`)
+    console.log(`[${microservice.name}] Creating Token for ${microservice.name}`)
         // check if microservice has active Api_keys
     const response = await axios.get(endpoint, {
         headers: { Authorization: `Bearer ${API_KEY}`}
@@ -97,9 +118,22 @@ async function getRawJWT(apiKey) {
     const endpoint = ENDPOINT_USER_KEY_RAW.replace(':keyId', apiKey.id);
     const response = await axios.get(endpoint, { headers: { Authorization: `Bearer ${API_KEY}`} });
 
-    return response.data.jwt;
+    return await response.data.jwt;
 }
 
+/**
+* Deploy a JWT to a Microservice Endpoint
+*/
+async function deployJWT(jwt, microservice) {
+    try {
+        return await axios.post(microservice.endpoint, {
+            jwt
+        }, { httpsAgent });
+        console.log(`[${microservice.name}] JWT deployed successfully`);
+    } catch (e) {
+        console.log(`[${microservice.name}] Error when deploying JWT to the microservice: ${e.message}`);
+    }
+}
 
 
 app.get('/', (req, res) => {

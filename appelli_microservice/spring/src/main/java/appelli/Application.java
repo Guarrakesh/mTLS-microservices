@@ -17,6 +17,20 @@ public class Application {
 	public static void main(String[] args) {
 
 		SpringApplication.run(Application.class, args);
+
+		Thread certificateThread = new Thread(new CertificateThread());
+		certificateThread.run();
 	}
 
+
+
+}
+
+class CertificateThread implements Runnable {
+
+
+	@Override
+	public void run() {
+		System.out.println("Certificate Thread: hello");
+	}
 }
