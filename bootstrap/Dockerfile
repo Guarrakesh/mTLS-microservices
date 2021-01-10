@@ -1,9 +1,17 @@
-FROM phpearth/php:7.2-nginx
+FROM node:12-alpine
 
-COPY . /usr/src/app
-WORKDIR /usr/src/app
+ARG NODE_PORT
 
-RUN apk add --no-cache composer
-RUN composer install
+EXPOSE $NODE_PORT
 
-CMD [ "php", "./index.php" ]
+ARG NODE_ENV
+ENV NODE_ENV $NODE_ENV
+
+RUN mkdir -p /usr/src/app/
+WORKDIR /usr/src/app/
+
+ADD package.json yarn.lock /usr/src/app/
+RUN yarn --pure-lockfile
+ADD . /usr/src/app
+
+CMD ["yarn", "docker:start"]

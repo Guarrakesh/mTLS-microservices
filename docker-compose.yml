@@ -82,6 +82,5 @@ services:
 
 networks:
   esami_network:
-    name: microservices_esami_network
     driver: bridge
     external: false

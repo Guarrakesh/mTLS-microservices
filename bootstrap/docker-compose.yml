@@ -1,0 +1,19 @@
+version: "2"
+services:
+  bootstrap:
+    build: .
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+      - NODE_PORT=8080+
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "81:8080"
+    networks:
+      - microservices_esami_network
+
+networks:
+  microservices_esami_network:
+    external: true

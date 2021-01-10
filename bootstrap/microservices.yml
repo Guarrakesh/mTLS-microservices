@@ -1,0 +1,7 @@
+microservices:
+  - name: appelli_microservice
+    userId: 4
+    endpoint: https://appelli/credential
+  - name: prenotazioni_microservice
+    userId: 5
+    endpoint: https://appelli/credential

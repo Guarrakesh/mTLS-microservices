@@ -1,0 +1,22 @@
+{
+  "name": "bootstrap",
+  "version": "1.0.0",
+  "description": "Bootstrap Microservice",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev:watch": "nodemon server.js",
+    "start": "node server.js",
+    "docker:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
+    "docker:start": "cross-env NODE_ENV=production pm2-docker start ./src/index.js",
+    "docker:prod": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.16.1",
+    "js-yaml": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
