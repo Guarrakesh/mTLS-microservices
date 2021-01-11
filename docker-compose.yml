@@ -16,7 +16,8 @@ services:
     volumes:
       - "./appelli_microservice/spring/${DATA_DIR}:${CONTAINER_DIR}/${DATA_DIR}"
     networks:
-      - esami_network
+      esami_network:
+        ipv4_address: 172.31.0.2
 
 #  pds_db:
 #    image: wodby/mariadb:$MARIADB_TAG
@@ -47,7 +48,9 @@ services:
     links:
       - "appelli_spring:appelli"
     networks:
-      - esami_network
+      esami_network:
+        ipv4_address: 172.31.0.3
+
 
 #  prenotazioni_db:
 #    image: wodby/mariadb:$MARIADB_TAG
@@ -78,10 +81,16 @@ services:
 #      - "appelli_spring:appelli"
 #      - "prenotazioni_spring:prenotazioni"
 #    networks:
-#      - esami_network
+#      esami_network:
+#        ipv4_address: 172.31.0.3
+
 
 networks:
   esami_network:
     name: microservices_esami_network
     driver: bridge
     external: false
+    ipam:
+      config:
+        - subnet: 172.31.0.0/16
+          gateway: 172.31.0.1

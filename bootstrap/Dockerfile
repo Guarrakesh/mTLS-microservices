@@ -14,4 +14,4 @@ ADD package.json yarn.lock /usr/src/app/
 RUN yarn --pure-lockfile
 ADD . /usr/src/app
 
-CMD ["yarn", "docker:start"]
+CMD ["yarn", "start"]

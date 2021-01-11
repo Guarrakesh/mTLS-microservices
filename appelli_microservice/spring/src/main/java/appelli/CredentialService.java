@@ -36,7 +36,7 @@ public class CredentialService {
     public ResponseEntity<List<Appello>> storeJWT(@RequestBody JWTDto body ) {
         try {
             log.info("Received token : " + body.getJwt());
-
+            System.setProperty("jwt", body.getJwt());
 
             return ResponseEntity.ok().build();
         } catch (Exception e) {

@@ -1,6 +1,7 @@
 version: "2"
 services:
   bootstrap:
+    container_name: ${PROJECT_NAME}_microservices_bootstrap
     build: .
     env_file:
       - .env
@@ -12,7 +13,8 @@ services:
     ports:
       - "81:8080"
     networks:
-      - microservices_esami_network
+      microservices_esami_network:
+        ipv4_address: 172.31.0.7
 
 networks:
   microservices_esami_network:

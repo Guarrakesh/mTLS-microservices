@@ -43,5 +43,8 @@ make up
 
 ### Dump LEMUR Database
 * Install a PostegreSQL client to have pg_dump and psql binaries
+* docker exec -ti mTLS_lemur_postgres psql -U lemur -d postgres -c "drop database lemur with (force)"
+* docker exec -ti mTLS_lemur_postgres psql -U lemur -d postgres -c "create database lemur"
+
 * ./pg_dump -h localhost -p 5432 -U lemur > {DUMP_FILE}
 * ./psql -h localhost -p 5432 -U lemur lemur < ${DUMP_FILE}

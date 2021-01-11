@@ -1,6 +1,7 @@
 version: "2"
 services:
   lemur-web:
+    container_name: ${PROJECT_NAME}_lemur_web
     restart: always
     build: ./web
     expose:
@@ -13,8 +14,11 @@ services:
       DEBUG: 'False'
       LEMUR_CONF: /usr/local/src/lemur/lemur.conf.py
     networks:
-      - microservices_esami_network
+      microservices_esami_network:
+        ipv4_address: 172.31.0.5
+
   lemur-nginx:
+    container_name: ${PROJECT_NAME}_lemur_nginx
     restart: always
     build: ./nginx/
     ports:
@@ -26,8 +30,10 @@ services:
       - lemur-web
       - lemur-web:web
     networks:
-      - microservices_esami_network
+      microservices_esami_network:
+        ipv4_address: 172.31.0.6
   postgres:
+    container_name: ${PROJECT_NAME}_lemur_postgres
     restart: always
     image: postgres:latest
     ports:
