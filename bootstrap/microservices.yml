@@ -1,7 +1,7 @@
 microservices:
   - name: appelli_microservice
     userId: 4
-    endpoint: https://172.31.0.2:8080/credential
+    endpoint: https://172.18.0.2:8080/credential
   - name: prenotazioni_microservice
     userId: 5
-    endpoint: https://172.31.0.3:8080/credential
+    endpoint: https://172.18.0.3:8080/credential
