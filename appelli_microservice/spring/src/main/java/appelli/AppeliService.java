@@ -25,6 +25,7 @@ public class AppeliService {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Appello>> index() {
         try {
+
             List<Appello> appelli = repository.findAll();
 
             return ResponseEntity.ok(appelli);
