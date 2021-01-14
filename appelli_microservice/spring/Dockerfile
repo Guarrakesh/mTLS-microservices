@@ -5,6 +5,8 @@ WORKDIR /build
 COPY pom.xml .
 
 ARG DATA_DIR
+ARG DATA_PATH
+ENV DATA_PATH=$DATA_PATH
 RUN mvn dependency:go-offline
 COPY $DATA_DIR /app/data
 
@@ -15,7 +17,5 @@ RUN mvn package
 # Step : Package image
 FROM openjdk:8-jre-alpine
 RUN apk update && apk add bash
-
-
 CMD exec java $JAVA_OPTS -jar /app/my-app.jar
 COPY --from=target /build/target/*.jar /app/my-app.jar

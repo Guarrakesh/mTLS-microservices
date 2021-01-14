@@ -7,6 +7,7 @@ services:
     build:
       args:
         DATA_DIR: ${DATA_DIR}
+        DATA_PATH: ${DATA_PATH}
       context: appelli_microservice/spring
     container_name: "${PROJECT_NAME}_appelli_spring"
     env_file:

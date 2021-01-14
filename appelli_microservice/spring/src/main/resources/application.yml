@@ -25,4 +25,4 @@ endpoints:
   shutdown:
     enabled: true
 
-
+dataPath: ${DATA_PATH}
