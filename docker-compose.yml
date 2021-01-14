@@ -10,6 +10,8 @@ services:
         DATA_PATH: ${DATA_PATH}
       context: appelli_microservice/spring
     container_name: "${PROJECT_NAME}_appelli_spring"
+    environment:
+      DATA_PATH: ${DATA_PATH}
     env_file:
       - appelli_microservice/spring.env
     ports:
@@ -89,7 +91,7 @@ services:
 networks:
   esami_network:
     name: microservices_esami_network
-    driver: bridge
+    driver: macvlan
     external: false
     ipam:
       config:

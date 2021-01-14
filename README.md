@@ -48,3 +48,12 @@ make up
 
 * ./pg_dump -h localhost -p 5432 -U lemur > {DUMP_FILE}
 * ./psql -h localhost -p 5432 -U lemur lemur < ${DUMP_FILE}
+
+
+### Dependency Check
+
+* Copy spring.env to spring.local.env and remove absolute paths of the container and leave relative paths for "spring" folder
+* ``` cd {microservice_folder}```
+* ``` source spring.local.env ```
+* ``` cd spring ```
+* ``` ./mvnw dependecy-check:check```

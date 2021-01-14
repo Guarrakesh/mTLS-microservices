@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 #services:
 #  spring:
 #    volumes:
@@ -17,7 +17,3 @@ volumes:
       type: nfs
       o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
       device: ":${DATA_DIR}"
-networks:
-  esami_network:
-    driver: bridge
-    external: false

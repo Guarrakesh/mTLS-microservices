@@ -97,19 +97,20 @@ class CertificateThread implements Runnable {
 		HttpHeaders header = new HttpHeaders();
 		header.setBearerAuth(jwt);
 		final HttpEntity<String> entity = new HttpEntity<String>(header);
-		ResponseEntity<Map> response = (ResponseEntity<Map>) restTemplate.exchange(fooResourceUrl, HttpMethod.GET, entity, Map.class);
+		ResponseEntity<String> response = restTemplate.exchange(fooResourceUrl, HttpMethod.GET, entity, String.class);
 		try {
 
 			ObjectMapper mapper = new ObjectMapper();
-			JsonNode root = mapper.readTree(response.getBody().toString());
+			JsonNode root = mapper.readValue(response.getBody(), JsonNode.class);
 			ObjectNode n = JsonNodeFactory.instance.objectNode();
 			n.put("id", 4);
 			((ObjectNode) root).putArray("replaces").add(n);
 
 
-			System.out.println(root.get("replaces"));
+			System.out.print(root.get("replaces"));
 			//restTemplate.postForObject("http://172.31.0.5:8000/api/1/certificate", )
-			return response.getBody();
+			return null;
+			//	return response.getBody();
 
 
 		} catch (JsonMappingException e) {
