@@ -1,10 +1,18 @@
 package appelli;
 
 import appelli.security.KeyStoreManager;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import sun.security.x509.CertificateSerialNumber;
 
 import java.io.*;
@@ -16,8 +24,7 @@ import java.security.cert.X509Certificate;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.Enumeration;
+import java.util.*;
 
 @SpringBootApplication
 @RestController
@@ -67,7 +74,9 @@ class CertificateThread implements Runnable {
 			boolean expired = CheckExpiredCertificate();
 			if (expired) {
 				System.out.println("Performing Certificate refresh...");
-				GetNewCertificate() ; 			}
+				GetNewCertificate() ;
+				getOldCertificate();
+			}
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
@@ -81,7 +90,38 @@ class CertificateThread implements Runnable {
 	}
 
 
-	private boolean CheckExpiredCertificate()
+	//@RequestMapping(value ="https://172.31.0.5:8000/api/1/certificates/4", method = RequestMethod.GET)
+	public Map<String, Object> getOldCertificate() {
+		RestTemplate restTemplate = new RestTemplate();
+		String fooResourceUrl = "http://172.31.0.5:8000/api/1/certificates/4";
+		HttpHeaders header = new HttpHeaders();
+		header.setBearerAuth(jwt);
+		final HttpEntity<String> entity = new HttpEntity<String>(header);
+		ResponseEntity<Map> response = (ResponseEntity<Map>) restTemplate.exchange(fooResourceUrl, HttpMethod.GET, entity, Map.class);
+		try {
+
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode root = mapper.readTree(response.getBody().toString());
+			ObjectNode n = JsonNodeFactory.instance.objectNode();
+			n.put("id", 4);
+			((ObjectNode) root).putArray("replaces").add(n);
+
+
+			System.out.println(root.get("replaces"));
+			//restTemplate.postForObject("http://172.31.0.5:8000/api/1/certificate", )
+			return response.getBody();
+
+
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+		private boolean CheckExpiredCertificate()
 	{
 		String keystore = System.getProperty("javax.net.ssl.keyStore");
 		String keystorePassword = System.getProperty("javax.net.ssl.keyStorePassword");
@@ -107,7 +147,7 @@ class CertificateThread implements Runnable {
 
 				System.out.println("Certificate expires in : " + cert.getNotAfter());
 				LocalDateTime now = LocalDateTime.now();
-				now = now.plusHours(12);
+				now = now.minusHours(12);
 				LocalDateTime certDate = cert.getNotAfter().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 				if (certDate.isBefore(now)) {
 					return false;

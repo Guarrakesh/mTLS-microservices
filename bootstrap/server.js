@@ -94,9 +94,10 @@ async function createJWT(userId, name)
 {
     const endpoint = ENDPOINT_USER_KEYS.replace(':userId', userId);
     const now = new Date();
+    now.setFullYear(now.getFullYear() + 1);
     try {
         const response = await axios.post(endpoint, {
-            ttl: now.setFullYear(now.getFullYear() + 1),
+            ttl: now.getTime()/1000,
             name: `JWT Long Lived - ${name}`
         },
         {
